@@ -1,7 +1,46 @@
 <resources>
+    <!-- connection page -->
+    <string name="connection">Connection</string>
+    <string name="email">xxxxxx@example.com</string>
+    <string name="emailError">Please set a valid email address</string>
+    <string name="password">Your password</string>
+    <string name="passwordError">Please set a valid password</string>
+    <string name="login">Connect</string>
+    <string name="login_page">Login page</string>
+    <string name="dont_have_account">If you don\'t have an account, you can create it to access to the plant management platform</string>
+
+    <!-- general -->
     <string name="app_name">Plant Care</string>
-    <string name="connexion">Connexion</string>
-    <string name="login">Email</string>
-    <string name="password">Mot de passe</string>
-    <string name="validate">Valider</string>
+    <string name="skip">skip</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="validate">Validate</string>
+    <string name="action_settings">Settings</string>
+    <string name="title">Welcome</string>
+
+    <!-- inscription  page -->
+    <string name="birthdayDate">Birth Day</string>
+    <string name="lastname">Your lastname</string>
+    <string name="lastnameT">Lastname</string>
+    <string name="your_name">Your name</string>
+    <string name="firstname">Fistname</string>
+    <string name="woman">Women</string>
+    <string name="man">Men</string>
+    <string name="inscription">Inscription</string>
+    <string name="create">Create account</string>
+    <string name="have_account">If you have an account, go to login page</string>
+
+
+    <string name="welcome">Plant management platform</string>
+    <string name="plant">My plant</string>
+    <string name="weather">Weather</string>
+    <string name="weather_description">The weather</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="idPlant">1</string>
+    <string name="plantName">Plant Name</string>
+    <string name="Water" />
+    <string name="enable">Enable</string>
+
+
 </resources>

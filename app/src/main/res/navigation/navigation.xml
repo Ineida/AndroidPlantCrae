@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/connectionFragment">
+
+    <fragment
+        android:id="@+id/connectionFragment"
+        android:name="com.projectPlant.fragment.ConnectionFragment"
+        android:label="ConnectionFragment">
+        <action
+            android:id="@+id/action_connectionFragment_to_inscriptionFragment"
+            app:destination="@id/inscriptionFragment" />
+        <action
+            android:id="@+id/action_connectionFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inscriptionFragment"
+        android:name="com.projectPlant.fragment.InscriptionFragment"
+        android:label="InscriptionFragment">
+        <action
+            android:id="@+id/action_inscriptionFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.projectPlant.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="idPerson"
+            app:argType="integer" />
+    </fragment>
+</navigation>
