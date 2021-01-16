@@ -1,19 +1,22 @@
 package com.projectPlant.modelView
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.projectPlant.model.LoginResponse
+import com.projectPlant.model.Storage
 import com.projectPlant.model.User
 import com.projectPlant.service.ApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 
 class UserConnectionModelView(
-        _user: User?) : ViewModel() {
+    _user: User?, context: Context
+) : Storage(context) {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -27,7 +30,7 @@ class UserConnectionModelView(
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
-        get() = _token
+        get() = _response
 
     private val _change = MutableLiveData<Boolean>()
     val change: LiveData<Boolean>
@@ -45,8 +48,7 @@ class UserConnectionModelView(
     }
 
     init {
-        Log.i("Identit" +
-                "ViewModel", "created")
+        Log.i("UserConnectionModelView", "created")
         initializeUser()
         _change.value = false
     }
@@ -54,7 +56,8 @@ class UserConnectionModelView(
     private fun createAccount() {
         uiScope.launch {
             try {
-                val response = ApiService.retrofitService.createAccountAsync(user = user.value!!).await()
+                val response =
+                    ApiService.retrofitUserService.createAccountAsync(user = user.value!!).await()
                 extractData(response = response)
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
@@ -65,8 +68,11 @@ class UserConnectionModelView(
     private fun login() {
         uiScope.launch {
             try {
-                val response = ApiService.retrofitService.loginAsync(user = user.value!!).await()
+                val response =
+                    ApiService.retrofitUserService.loginAsync(user = user.value!!).await()
                 extractData(response)
+            } catch (e: SocketTimeoutException) {
+                _response.value = "Failure: please check your internet connection"
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }
@@ -76,10 +82,11 @@ class UserConnectionModelView(
 
     private fun extractData(response: LoginResponse) {
         try {
+            if (response.idPerson != null && response.idPerson != 0) {
+                _idPerson.value = response.idPerson
+            }
             _token.value = response.token
-            _idPerson.value = response.idPerson
-
-            _response.value = "Success: your account have been created"
+            _response.value = "Success: you are logged"
 
         } catch (e: Exception) {
             _response.value = "Failure: ${e.message}"
@@ -99,7 +106,7 @@ class UserConnectionModelView(
 
     override fun onCleared() {
         super.onCleared()
-        Log.i("IdentityViewModel", "destroyed")
+        Log.i("UserConnectionModelView", "destroyed")
         viewModelJob.cancel()
     }
 }

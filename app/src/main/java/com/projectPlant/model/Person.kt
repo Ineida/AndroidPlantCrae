@@ -1,30 +1,59 @@
 package com.projectPlant.model
 
-import androidx.annotation.Keep
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import java.util.*
+import android.os.Parcel
+import android.os.Parcelable
 
-@Keep
-@Entity(tableName = "person")
 data class Person(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id_person")
-    private var idPerson: Int = 0,
+    var idperson: Int = 0,
+    var surname: String = "",
+    var name: String = "",
+    var birthdate: String = "",
+    var gender: String = "F",
+    var username: String = "",
+    var city: String = "",
+    var age: Int = 0
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readInt()
+    )
 
-    @ColumnInfo(name = "lastname")
-    private var surname: String = "",
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(idperson)
+        parcel.writeString(surname)
+        parcel.writeString(name)
+        parcel.writeString(birthdate)
+        parcel.writeString(gender)
+        parcel.writeString(username)
+        parcel.writeString(city)
+        parcel.writeInt(age)
+    }
 
-    @ColumnInfo(name = "firstname")
-    private var name: String = "",
+    override fun describeContents(): Int {
+        return 0
+    }
 
-    @ColumnInfo(name = "birth_day")
-    private var birthdate: Date,
+    companion object CREATOR : Parcelable.Creator<Person> {
+        override fun createFromParcel(parcel: Parcel): Person {
+            return Person(parcel)
+        }
 
-    @ColumnInfo(name = "gender")
-    private var gender: String = "",
+        override fun newArray(size: Int): Array<Person?> {
+            return arrayOfNulls(size)
+        }
+    }
 
-    @ColumnInfo(name = "user")
-    private var username: String = ""
+}
+
+
+data class PersonInfo(
+    var idperson: Int = 0,
+
+    var city: String = ""
 )

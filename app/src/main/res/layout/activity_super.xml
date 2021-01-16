@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SuperActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20sp"
         android:orientation="vertical">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_connection"
+        <fragment
+            android:id="@+id/connectionFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:name="com.projectPlant.fragment.ConnectionFragment"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="@dimen/padding"
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation" />
 

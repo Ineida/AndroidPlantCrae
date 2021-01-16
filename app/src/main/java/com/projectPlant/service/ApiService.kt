@@ -20,7 +20,10 @@ private val retrofit = Retrofit.Builder()
 
 
 object ApiService {
-    val retrofitService: IApiService by lazy { retrofit.create(IApiService::class.java) }
+    val retrofitPersonService: IApiPersonService by lazy { retrofit.create(IApiPersonService::class.java) }
+    val retrofitPlantService: IApiPlantService by lazy { retrofit.create(IApiPlantService::class.java) }
+    val retrofitUserService: IApiUserService by lazy { retrofit.create(IApiUserService::class.java) }
+    val retrofitWeatherService: IApiWeatherService by lazy { retrofit.create(IApiWeatherService::class.java) }
 }
 
 

@@ -3,8 +3,8 @@
     <dimen name="font">18sp</dimen>
     <dimen name="fontLittle">11sp</dimen>
     <dimen name="margin">24dp</dimen>
-    <dimen name="title">36sp</dimen>
-    <dimen name="title_lg">30sp</dimen>
+    <dimen name="title">25sp</dimen>
+    <dimen name="title_lg">22sp</dimen>
     <dimen name="bt_size">250dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="close_magin_r">30dp</dimen>
@@ -12,4 +12,9 @@
     <dimen name="NumberSize">50dp</dimen>
     <dimen name="little_bt_size">80dp</dimen>
     <dimen name="little_size">50dp</dimen>
+    <dimen name="size">200dp</dimen>
+    <dimen name="header">100dp</dimen>
+    <dimen name="spinner">150dp</dimen>
+    <dimen name="calendar_size">300dp</dimen>
+    <dimen name="spinnerSize">300dp</dimen>
 </resources>

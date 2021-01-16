@@ -1,67 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".fragment.HomeFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <data>
 
-    <androidx.cardview.widget.CardView
+        <variable
+            name="viewModel"
+            type="com.projectPlant.modelView.HomePageViewModel"></variable>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <fragment
+            android:id="@+id/frag_header"
+            android:name="com.projectPlant.fragment.HeaderFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/little_size"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_header">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <TextView
+                android:id="@+id/tv_weather"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{viewModel.weather.condition.text}" />
+
+            <TextView
+                android:id="@+id/tv_weather_t"
+                android:layout_width="89dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{String.format(String.valueOf(viewModel.weather.avgtemp_c), @string/degres)}" />
+
+            <ImageView
+                android:id="@+id/iv_weather"
+                android:layout_width="66dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/weather_description"
+                android:src="@{viewModel.weather.icon}"
+                tools:src="@tools:sample/avatars" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_plant"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/plant"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_weather"
+            app:layout_constraintEnd_toStartOf="@+id/bt_weather"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/bt_weather"
+            android:layout_width="226dp"
+            android:layout_height="0dp"
+            android:text="@string/weather"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_plant"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_plant">
+
+            <fragment
+                android:id="@+id/frag_plant"
+                android:name="com.projectPlant.fragment.PlantFragment"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/tv_weather"
-                    android:layout_width="306dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_weather"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_plant">
 
-                <ImageView
-                    android:id="@+id/iv_weather"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/weather_description"
-                    tools:src="@tools:sample/avatars" />
+            <fragment
+                android:id="@+id/frag_weather"
+                android:name="com.projectPlant.fragment.WeatherFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ScrollView
-                android:id="@+id/sv_plant"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-            </ScrollView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
